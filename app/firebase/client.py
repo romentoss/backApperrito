@@ -15,6 +15,7 @@ Se usa para acceder a Firestore, Auth y Storage desde el servidor.
     FIREBASE_STORAGE_BUCKET=tu-proyecto.appspot.com
 """
 
+import json
 import os
 
 import firebase_admin
@@ -26,18 +27,28 @@ load_dotenv()
 _service_account_path = os.getenv(
     "FIREBASE_SERVICE_ACCOUNT_PATH", "./firebase-service-account.json"
 )
+_service_account_json = os.getenv("FIREBASE_SERVICE_ACCOUNT_JSON", "").strip()
 _storage_bucket = os.getenv("FIREBASE_STORAGE_BUCKET", "")
 
 
 def _init_firebase():
     """Inicializa Firebase Admin SDK de forma lazy (solo si no está ya inicializado)."""
     if not firebase_admin._apps:
-        if not os.path.isfile(_service_account_path):
-            raise RuntimeError(
-                f"No se encontró el archivo de credenciales Firebase: '{_service_account_path}'. "
-                "Consulta backend/README.md para configurarlo."
-            )
-        cred = credentials.Certificate(_service_account_path)
+        if _service_account_json:
+            try:
+                cred_info = json.loads(_service_account_json)
+                cred = credentials.Certificate(cred_info)
+            except json.JSONDecodeError as exc:
+                raise RuntimeError(
+                    "FIREBASE_SERVICE_ACCOUNT_JSON no contiene un JSON válido."
+                ) from exc
+        else:
+            if not os.path.isfile(_service_account_path):
+                raise RuntimeError(
+                    f"No se encontró el archivo de credenciales Firebase: '{_service_account_path}'. "
+                    "Consulta backend/README.md para configurarlo."
+                )
+            cred = credentials.Certificate(_service_account_path)
         firebase_admin.initialize_app(cred, {"storageBucket": _storage_bucket})
 
 
