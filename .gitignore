@@ -1,0 +1,18 @@
+# Entorno virtual Python
+venv/
+
+# Variables de entorno (contienen secretos)
+.env
+
+# Credenciales de Firebase (NUNCA subir a Git)
+firebase-service-account.json
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# IDE
+.vscode/
+.idea/

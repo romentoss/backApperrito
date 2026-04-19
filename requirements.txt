@@ -1,0 +1,15 @@
+# 🐾 Apperritos Backend - Dependencias
+# =====================================
+# FastAPI: Framework web moderno y rápido para APIs
+# uvicorn: Servidor ASGI para correr FastAPI
+# firebase-admin: SDK de Firebase para el servidor
+# python-dotenv: Carga de variables de entorno desde .env
+# pydantic: Validación de datos (incluido con FastAPI)
+# python-multipart: Soporte para upload de archivos (fotos de mascotas)
+
+fastapi==0.115.12
+uvicorn[standard]==0.34.2
+firebase-admin==7.4.0
+python-dotenv==1.1.0
+python-multipart==0.0.20
+pydantic==2.11.3
