@@ -15,6 +15,7 @@ Configuración recomendada para Render:
 - **Build Command**: `pip install -r requirements.txt`
 - **Start Command**: `uvicorn app.main:app --host 0.0.0.0 --port $PORT`
 - **Python version**: definida en `runtime.txt` como `python-3.11.11`
+- **Variable recomendada en Render**: `PYTHON_VERSION=3.11.11` (evita que Render use 3.14)
 
 Variables de entorno requeridas:
 
