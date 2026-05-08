@@ -1,18 +1,38 @@
-# Entorno virtual Python
+# ─── Entorno virtual Python ─────────────────────────────────
 venv/
+.venv/
+env/
 
-# Variables de entorno (contienen secretos)
+# ─── Variables de entorno (NUNCA subir a Git) ────────────────
 .env
+.env.*
+!.env.example
 
-# Credenciales de Firebase (NUNCA subir a Git)
+# ─── Credenciales Firebase / Google Cloud (NUNCA subir) ─────
 firebase-service-account.json
+service-account*.json
+*-firebase-adminsdk-*.json
+google-credentials.json
 
-# Python
+# ─── Python ─────────────────────────────────────────────────
 __pycache__/
 *.pyc
 *.pyo
+*.pyd
 .pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+dist/
+build/
+.eggs/
 
-# IDE
+# ─── Logs y temporales ──────────────────────────────────────
+*.log
+logs/
+
+# ─── IDE ─────────────────────────────────────────────────────
 .vscode/
 .idea/
+*.swp
+*~
